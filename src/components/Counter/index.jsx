@@ -64,6 +64,7 @@ class Counter extends Component {
     }
 }
 
+
 function Count ({count}) {
     return <div>I will rerender your count using only fresh props: {count}</div>
 }
