@@ -1,7 +1,8 @@
 import './App.css';
 import {Component} from 'react';
 // import StopWatch from './StopWatch/index.jsx';
-import ViewPortParams from './components/ViewPortParams'
+// import ViewPortParams from './components/ViewPortParams'
+import StopWatch2Date from './components/StopWatch2Date';
 
 // імітація щоб протестувати метод componentWillUnmount (зникнення/видалення)
 class  App extends Component {
@@ -37,8 +38,11 @@ class  App extends Component {
       {/*Якщо isVisible=true то оператор && далі піде шукати false і поверне StopWatch
       Якщо sVisible=false то оператор && поверне false, але реакт ігнорує false (true, null, undefinded)
       тому насправді не буде рендеритись нічого. У нас або буде кнопка і StopWatch або лише кнопка */}
-      <button onClick={this.handleClick}>{isVisible?'Unmount':'Mount'}</button>
-      {isVisible && <ViewPortParams/>} 
+
+      {/* <button onClick={this.handleClick}>{isVisible?'Unmount':'Mount'}</button> */}
+      {/* {isVisible && <ViewPortParams/>}  */}
+      <StopWatch2Date/>
+      
       </>
     )
 
