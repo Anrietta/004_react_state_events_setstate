@@ -1,0 +1,22 @@
+.sliderWrapper {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.sliderWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+.sliderWrapper figcaption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(200, 200, 200, 0.5);
+    text-align: center;
+}
+
