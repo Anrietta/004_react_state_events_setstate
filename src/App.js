@@ -5,61 +5,51 @@ import {Component} from 'react';
 // import StopWatch2Date from './components/StopWatch2Date';
 // import AnimalSlider from './components/AnimalSlider/index'
 // import UsersList from "./components/UsersList/index.jsx";
-import TodoListExtraTask from "./components/TodoListExtraTask/index.jsx";
+// import TodoListExtraTask from "./components/TodoListExtraTask/index.jsx";
+import ThemeBtn from './components/ThemeBtn/index.jsx';
+import UsersListRefactoring from "./components/UsersListRefactoring/index.jsx";
 
 // перепишем App як функціональний компонент для практики з UsersList
 
-function App (props)  {
-  return <TodoListExtraTask/>;
+// для передачі Child => Child створимо кнопку перемикання теми
+// тема буде стилями задіюватись на сам ThemeBtn та на UsersListItem компонент
+// тобто для передачі даних між ThemeBtn та UsersList=>UsersListItem нам потрібно задіяти App як найближчого спільного батька
+
+//App
+//  ThemeBtn (змінює напис на самій кнопці Dark/Light)
+//  UsersList
+//    UsersListItem (змінює колір підсвітки)
+
+// ThemeBtn передбачає стан isLight який буде спільним і для ThemeBtn і для UsersListItem
+// оскільки компонент передбачає стан,то ми робим його класовим
+// і пописуємо йцей стан в App бо він спілький батьківський компонент 
+class App extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       isLight: true,
+    }
+  }
+
+  setTheme = () => {
+    const {isLight} = this.state;
+    this.setState({isLight: !isLight})
+  }
+  render() {
+    const {isLight} = this.state;
+
+      return ( 
+      <>
+        <ThemeBtn isLight={isLight} changeTheme={this.setTheme}/>
+        <UsersListRefactoring isLight={isLight}/>;
+      </>
+    )
+  }
+
 }
 
-// імітація щоб протестувати метод componentWillUnmount (зникнення/видалення)
-// class  App extends Component {
-//   constructor(props) {
-//     super(props)
-  
-//     this.state = {
-//        isVisible: true
-//     }
-//   }
 
-//   handleClick = () => {
-//     const {isVisible} = this.state;
-//     this.setState({isVisible: !isVisible})
-//   }
-
-//   render() {
-//     const {isVisible} = this.state;
-
-//     // ТАК НЕ ПИСАТИ:
-//     // if (isVisible) {
-//     //   return (
-//     //     <>
-//     //       <StopWatch/>
-//     //       <button onClick={this.handleClick}>{isVisible?'Unmount':'Mount'}</button>
-//     //     </>
-//     //   )
-//     // }
-//     // return <button onClick={this.handleClick}>{isVisible?'Unmount':'Mount'}</button>
-
-//     return (
-//       <>
-//       {/*Якщо isVisible=true то оператор && далі піде шукати false і поверне StopWatch
-//       Якщо sVisible=false то оператор && поверне false, але реакт ігнорує false (true, null, undefinded)
-//       тому насправді не буде рендеритись нічого. У нас або буде кнопка і StopWatch або лише кнопка */}
-
-//       {/* <button onClick={this.handleClick}>
-//         {isVisible?'Unmount':'Mount'}
-//       </button>
-//       {isVisible && <AnimalSlider/>}  */}
-//       {/* <StopWatch2Date/> */}
-      
-//       </>
-//     )
-
-//   }
-// }
 
 export default App;
 
-// new Counter().render(); - отримати розмітку з класвого компонента
