@@ -1,0 +1,63 @@
+.formContainer {
+    margin: 10px auto;
+    padding: 20px;
+    box-shadow: 0 0 5px grey;
+    max-width: 800px;
+    width: 100%;
+    min-width: 320px;
+}
+
+.formHeader {
+    text-align: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputName {
+
+}
+
+.input {
+    padding: 10px;
+    outline: none;
+}
+
+/* в React оскільки вже все заточено під JS то і валідацію 
+найчастіше ми будемо проводити за допом JS а не через HTML патерни*/
+.inputValid {
+    border: 2px solid green;
+}
+
+.inputInvalid {
+    border: 2px solid red;
+}
+
+
+/*
+робота зі стилями це стандартна задача,а на всі стандартні задачі 
+шукаєм стандартне ріщення на npm  (репозиторій де зберігається купа бібліотек)
+нам потрібна бібліотека classNames на npm
+1. в терміналі: npm i classnames
+2. в компонент імпортуємо import classNames from 'classnames';
+
+3. можна привязати classnames до поточного модуля css за допом bind,  
+щоб скоротити назви класів з styles.inputName до inputNmae
+import classNames from 'classnames/bind';
+import styles from './Button.module.css';
+
+// Прив'язуємо стилі до функції cx
+const cx = classNames.bind(styles);
+
+// Автоматично шукає назви 'base', 'active' всередині об'єкта styles
+const className = cx('base', { active: isActive });
+*/
