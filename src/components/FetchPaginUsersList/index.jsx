@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import getUsers from './api/index.js'
 
 class UsersLoader extends Component {
     constructor(props) {
@@ -23,8 +24,20 @@ class UsersLoader extends Component {
 
         this.setState({isFetching: true});  // виводим спінер завантаження одразу перед початком самого завантаж
     
-        fetch(`https://randomuser.me/api/?results=10&seed=pe2022&page=${currentPage}`)
-        .then(response => response.json())
+        // звернення до сервера краще виносити в окрему функцію, оскільки це окреме віконечко назовні
+        // якщо у нас всі зверненн ябудуть розкидані по компонентам то буде важко підтримувати код
+        // тому тут напряму fetch не будемо застосовувати
+        // fetch(`https://randomuser.me/api/?results=10&seed=pe2022&page=${currentPage}`)
+        // .then(response => response.json())
+
+        // замість цього викличемо нашу функцію getUsers з api і передамо обєкт опцій
+        getUsers({
+            page: currentPage,
+            results: 5,
+            seed: 'pe2022',
+            inc: ['name', 'gender', 'email', 'login'],
+        })
+
         // отримую data і зразу деструктурую щоб отримати results
         .then(({results}) => this.setState({users: results}))
         .catch(e => this.setState({error: e}))
@@ -83,7 +96,7 @@ class UsersLoader extends Component {
                         <ul>
                             {/* JSON.stringify(u) - просто щоб змусити React вивести обєкт юзера як рядок*/}
                             {users.map(u => (
-                                <li key={u.id.name}>{JSON.stringify(u)}</li>
+                                <li key={u.id.login}>{JSON.stringify(u)}</li>
                             ))}
                         </ul>
                     </>
