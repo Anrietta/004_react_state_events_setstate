@@ -31,11 +31,12 @@ class UsersLoader extends Component {
         // .then(response => response.json())
 
         // замість цього викличемо нашу функцію getUsers з api і передамо обєкт опцій
+        // але передавати постійно купу опцій геморно, можна залишити ті які змінюються а інші зробити дефолтними в ф-ї api/getUsers
         getUsers({
             page: currentPage,
             results: 5,
-            seed: 'pe2022',
-            inc: ['name', 'gender', 'email', 'login'],
+            // seed: 'pe2022',
+            // inc: ['name', 'gender', 'email', 'login'],
         })
 
         // отримую data і зразу деструктурую щоб отримати results
