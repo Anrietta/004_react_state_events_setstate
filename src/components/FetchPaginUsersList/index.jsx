@@ -8,10 +8,7 @@ class UsersLoader extends Component {
       this.state = {
         // це базовий набір стартових станів для реалізації завантаження списків 
         // користувачів з пагінацією, з передбаченням можливих помилок та стану завантаження
-         users: [
-            {id: 1, name: 'Ivo'},
-            {id: 2, name: 'Wally'}
-         ],  // стартовий масив юзерів до fetch()
+         users: [],  // стартовий масив юзерів до fetch()
          isFetching: false,  //маячок чи йде зараз завантаження даних
          error : null,  // маячок на випадок помилок
          currentPage: 1,  // стартова сторінка для реалізації пагінації
@@ -34,13 +31,10 @@ class UsersLoader extends Component {
         // але передавати постійно купу опцій геморно, можна залишити ті які змінюються а інші зробити дефолтними в ф-ї api/getUsers
         getUsers({
             page: currentPage,
-            results: 5,
+            results: 7,
             // seed: 'pe2022',
             // inc: ['name', 'gender', 'email', 'login'],
-        })
-
-        // отримую data і зразу деструктурую щоб отримати results
-        .then(({results}) => this.setState({users: results}))
+        }).then(({results}) => this.setState({users: results}))   // отримую data і зразу деструктурую щоб отримати results
         .catch(e => this.setState({error: e}))
         .finally(()=> this.setState({isFetching: false}));  // в будь якому разі error чи ні скидаю спінер завантаж
     }
@@ -97,7 +91,7 @@ class UsersLoader extends Component {
                         <ul>
                             {/* JSON.stringify(u) - просто щоб змусити React вивести обєкт юзера як рядок*/}
                             {users.map(u => (
-                                <li key={u.id.login}>{JSON.stringify(u)}</li>
+                                <li key={u.login.salt}>{JSON.stringify(u)}</li>
                             ))}
                         </ul>
                     </>
