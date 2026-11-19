@@ -1,0 +1,13 @@
+/*mixin - do not group the repeated values*/
+@mixin flex-container($jc: center, $ai: center, $fd: row)
+    display: flex
+    justify-content: $jc
+    align-items: $ai
+    flex-direction: $fd
+
+
+/*extend - group the repeated values*/
+%flex
+    display: flex
+    justify-content: center
+    align-items: center
